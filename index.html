@@ -1,0 +1,112 @@
+<html>
+<head>
+  <style>
+    body {
+      background-color: #000000;
+      font-family: "Times New Roman", serif;
+    }
+    .button {
+      font-size: 20px;
+      padding: 10px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .yes {
+      background-color: #00FF00;
+    }
+    .no {
+      background-color: #FF0000;
+    }
+    .gif {
+      width: 300px;
+      height: 300px;
+    }
+    .signature {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+    .thanks {
+      font-size: 25px;
+      color: #000000;
+      display: none;
+    }
+    .music {
+      background-color: #FFFF00;
+    }
+  </style>
+  <script>
+    var noTexts = ["Почему?", "Ты меня не любишь?", "ПОЖАЛУЙСТА", "Нажми да", "Я обижусь"];
+    var noIndex = 0;
+    function noClick() {
+      var yesButton = document.getElementById("yes");
+      yesButton.style.width = (yesButton.offsetWidth + 10) + "px";
+      yesButton.style.height = (yesButton.offsetHeight + 10) + "px";
+      yesButton.style.fontSize = (parseInt(yesButton.style.fontSize) + 1) + "px";
+      var noButton = document.getElementById("no");
+      noButton.style.width = (noButton.offsetWidth - 10) + "px";
+      noButton.style.height = (noButton.offsetHeight - 10) + "px";
+      // добавляем ограничения на размер кнопки нет
+      if (noButton.style.width < 50) {
+        noButton.style.width = 50 + "px";
+      }
+      if (noButton.style.height < 50) {
+        noButton.style.height = 50 + "px";
+      }
+      noIndex = (noIndex + 1) % noTexts.length;
+      noButton.innerHTML = noTexts[noIndex];
+    }
+    function yesClick() {
+      var gif1 = document.getElementById("gif1");
+      gif1.style.display = "none";
+      var gif2 = document.getElementById("gif2");
+      gif2.style.display = "block";
+      var thanks = document.getElementById("thanks");
+      thanks.style.display = "block";
+      // скрываем кнопки
+      var yesButton = document.getElementById("yes");
+      yesButton.style.display = "none";
+      var noButton = document.getElementById("no");
+      noButton.style.display = "none";
+      var musicButton = document.getElementById("music");
+      musicButton.style.display = "none";
+      // меняем цвет фона на белый
+      document.body.style.backgroundColor = "#FFFFFF";
+    }
+    // функция, которая включает или выключает фоновую музыку
+    function musicClick() {
+      var audio = document.getElementById("audio");
+      if (audio.paused) {
+        audio.play();
+        musicButton.innerHTML = "Выключить музыку";
+      } else {
+        audio.pause();
+        musicButton.innerHTML = "Включить музыку";
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- добавляем романтичную фоновую музыку -->
+  <audio id="audio" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" loop></audio>
+  <!-- меняем цвет надписи на блекло-розовый -->
+  <h1 align="center" style="color: #FFC0CB;">Ты будешь моим валентином? ❤️</h1>
+  <div align="center">
+    <img id="gif1" class="gif" src="https://media.tenor.com/rqUAxusl0EkAAAAC/peach-cat.gif" alt="peach cat">
+    <img id="gif2" class="gif" src="https://media.tenor.com/FSW_rKMOC0wAAAAC/love-mochi.gif" alt="love mochi" style="display: none;">
+    <!-- делаем кнопки меньше -->
+    <button id="yes" class="button yes" onclick="yesClick()" style="width: 50px; height: 50px; font-size: 20px; margin-top: 20px;">Да</button>
+    <button id="no" class="button no" onclick="noClick()" style="width: 50px; height: 50px; margin-top: 20px;">Нет</button>
+    <!-- добавляем кнопку включения фоновой музыки -->
+    <button id="music" class="button music" onclick="musicClick()">Включить музыку</button>
+    <!-- добавляем текст с благодарностью -->
+    <p id="thanks" class="thanks">Спасибо большое, любимый!! Люблю очень сильно!!</p>
+  </div>
+  <!-- добавляем текст с подписью -->
+  <p class="signature">От твоей Сашеньки Орцуевой</p>
+</body>
+</html>
